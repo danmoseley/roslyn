@@ -67,7 +67,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 AddPunctuation(SyntaxKind.DotToken);
                 AddKeyword(SyntaxKind.FieldKeyword);
             }
-            else if (symbol.ContainingType!.TypeKind == TypeKind.Enum)
+            else if (symbol.ContainingType!.TypeKind == TypeKind.Enum) // fields always have a containing type
             {
                 Builder.Add(CreatePart(SymbolDisplayPartKind.EnumMemberName, symbol, symbol.Name));
             }

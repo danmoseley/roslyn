@@ -130,7 +130,7 @@ namespace Microsoft.CodeAnalysis
                         return false;
                     }
 
-                    container = container.ContainingNamespace!;
+                    container = container.ContainingNamespace!; // non-global namespace always has a parent (checked IsGlobalNamespace above)
 
                     if (container is null)
                     {

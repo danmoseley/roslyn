@@ -192,14 +192,13 @@ namespace Microsoft.CodeAnalysis.SymbolDisplay
                 var ctor = attribute.AttributeConstructor;
                 if (ctor != null)
                 {
-                    var type = ctor.ContainingType;
-                    if (type != null && !ctor.Parameters.Any() && type.Name == "FlagsAttribute")
+                    var type = ctor.ContainingType!; // constructors always have a containing type
+                    if (!ctor.Parameters.Any() && type.Name == "FlagsAttribute")
                     {
-                        var containingSymbol = type.ContainingSymbol;
-                        if (containingSymbol != null &&
-                            containingSymbol.Kind == SymbolKind.Namespace &&
+                        var containingSymbol = type.ContainingSymbol!; // types always have a containing symbol
+                        if (containingSymbol.Kind == SymbolKind.Namespace &&
                             containingSymbol.Name == "System" &&
-                            containingSymbol.ContainingSymbol is INamespaceSymbol ns && ns.IsGlobalNamespace)
+                            ((INamespaceSymbol)containingSymbol.ContainingSymbol!).IsGlobalNamespace)
                         {
                             return true;
                         }
