@@ -1468,11 +1468,10 @@ namespace Microsoft.CodeAnalysis
 
             private static ITypeParameterSymbol? GetNthTypeParameter(INamedTypeSymbol typeSymbol, int n)
             {
-                var containingType = typeSymbol.ContainingType;
-                var containingTypeParameterCount = GetTypeParameterCount(containingType);
-                if (n < containingTypeParameterCount && containingType is not null)
+                var containingTypeParameterCount = GetTypeParameterCount(typeSymbol.ContainingType);
+                if (n < containingTypeParameterCount)
                 {
-                    return GetNthTypeParameter(containingType, n);
+                    return GetNthTypeParameter(typeSymbol.ContainingType!, n);
                 }
 
                 var index = n - containingTypeParameterCount;

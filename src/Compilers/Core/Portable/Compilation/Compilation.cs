@@ -1259,9 +1259,9 @@ namespace Microsoft.CodeAnalysis
 
                 addIfNotNull(Assembly.GetTypeByMetadataName(fullyQualifiedMetadataName));
 
-                var corLib = ObjectType.ContainingAssembly;
+                var corLib = ObjectType.ContainingAssembly!; // ObjectType always has a containing assembly
 
-                if (corLib is not null && !ReferenceEquals(corLib, Assembly))
+                if (!ReferenceEquals(corLib, Assembly))
                 {
                     addIfNotNull(corLib.GetTypeByMetadataName(fullyQualifiedMetadataName));
                 }
@@ -1746,7 +1746,7 @@ namespace Microsoft.CodeAnalysis
                             // a containing assembly, we treat them as in the current assembly for access purposes
                             return assemblyIsInReferences(s.ContainingAssembly ?? this.Assembly);
                         default:
-                            return assemblyIsInReferences(s.ContainingAssembly!);
+                            return assemblyIsInReferences(s.ContainingAssembly!); // concrete members always have a containing assembly
                     }
                 }
             }

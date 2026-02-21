@@ -90,8 +90,7 @@ namespace Microsoft.CodeAnalysis
                 if (attributeArgCount == parameterCount)
                 {
                     StringComparison options = description.MatchIgnoringCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal;
-                    var containingNamespace = attributeType.ContainingNamespace;
-                    return containingNamespace is not null && attributeType.Name.Equals(description.Name, options) && namespaceMatch(containingNamespace, description.Namespace, options);
+                    return attributeType.Name.Equals(description.Name, options) && namespaceMatch(attributeType.ContainingNamespace!, description.Namespace, options);
                 }
             }
 
@@ -131,14 +130,12 @@ namespace Microsoft.CodeAnalysis
                         return false;
                     }
 
-                    var nextContainer = container.ContainingNamespace;
+                    container = container.ContainingNamespace!; // non-global namespace always has a parent (checked IsGlobalNamespace above)
 
-                    if (nextContainer is null)
+                    if (container is null)
                     {
                         return false;
                     }
-
-                    container = nextContainer;
                 }
             }
         }

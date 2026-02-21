@@ -510,10 +510,10 @@ namespace Microsoft.CodeAnalysis.Emit
                 return associated;
             }
 
-            ISymbolInternal? containingSymbol = symbol.ContainingSymbol;
-            if (containingSymbol != null)
+            var containing = symbol.ContainingSymbol;
+            if (containing != null)
             {
-                switch (containingSymbol.Kind)
+                switch (containing.Kind)
                 {
                     case SymbolKind.NetModule:
                     case SymbolKind.Assembly:
@@ -522,7 +522,7 @@ namespace Microsoft.CodeAnalysis.Emit
                 }
             }
 
-            return containingSymbol;
+            return containing;
         }
 
         private static ISymbolInternal? GetAssociatedSymbol(ISymbolInternal symbol)

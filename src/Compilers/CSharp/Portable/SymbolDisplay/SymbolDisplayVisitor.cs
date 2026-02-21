@@ -186,7 +186,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 var containingNamespace = symbol.ContainingNamespace;
                 if (ShouldVisitNamespace(containingNamespace))
                 {
-                    containingNamespace.Accept(this.NotFirstVisitor);
+                    containingNamespace!.Accept(this.NotFirstVisitor);
                     AddPunctuation(containingNamespace.IsGlobalNamespace ? SyntaxKind.ColonColonToken : SyntaxKind.DotToken);
                 }
             }
@@ -368,7 +368,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             INamedTypeSymbol? containingType = symbol.ContainingType;
 
             // this method is only called for members and they should have a containingType or a containing symbol should be a TypeSymbol.
-            Debug.Assert(containingType != null || (symbol.ContainingSymbol is ITypeSymbol));
+            Debug.Assert((object?)containingType != null || (symbol.ContainingSymbol is ITypeSymbol));
 
             if (Format.MemberOptions.IncludesOption(SymbolDisplayMemberOptions.IncludeAccessibility) &&
                 (containingType == null ||

@@ -64,30 +64,29 @@ namespace Microsoft.CodeAnalysis
 
         /// <summary>
         /// Gets the <see cref="ISymbol"/> for the immediately containing symbol.
-        /// Returns <see langword="null"/> for top-level symbols like namespaces or certain error types.
         /// </summary>
         ISymbol? ContainingSymbol { get; }
 
         /// <summary>
-        /// Gets the <see cref="IAssemblySymbol"/> for the containing assembly. Returns <see langword="null"/> if the
+        /// Gets the <see cref="IAssemblySymbol"/> for the containing assembly. Returns null if the
         /// symbol is shared across multiple assemblies.
         /// </summary>
         IAssemblySymbol? ContainingAssembly { get; }
 
         /// <summary>
-        /// Gets the <see cref="IModuleSymbol"/> for the containing module. Returns <see langword="null"/> if the
+        /// Gets the <see cref="IModuleSymbol"/> for the containing module. Returns null if the
         /// symbol is shared across multiple modules.
         /// </summary>
         IModuleSymbol? ContainingModule { get; }
 
         /// <summary>
-        /// Gets the <see cref="INamedTypeSymbol"/> for the containing type. Returns <see langword="null"/> if the
+        /// Gets the <see cref="INamedTypeSymbol"/> for the containing type. Returns null if the
         /// symbol is not contained within a type.
         /// </summary>
         INamedTypeSymbol? ContainingType { get; }
 
         /// <summary>
-        /// Gets the <see cref="INamespaceSymbol"/> for the nearest enclosing namespace. Returns <see langword="null"/> if the
+        /// Gets the <see cref="INamespaceSymbol"/> for the nearest enclosing namespace. Returns null if the
         /// symbol isn't contained in a namespace.
         /// </summary>
         INamespaceSymbol? ContainingNamespace { get; }
