@@ -200,7 +200,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                         return true;
                     }
 
-                    namespaceSymbol = namespaceSymbol.ContainingNamespace;
+                    namespaceSymbol = namespaceSymbol.ContainingNamespace!;
                     inImmediatelyContainingSymbol = false;
                 }
                 while (namespaceSymbol != null);

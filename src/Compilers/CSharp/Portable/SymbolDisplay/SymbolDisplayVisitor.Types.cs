@@ -282,7 +282,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             var containingSymbol = symbol.ContainingSymbol;
             if (ShouldVisitNamespace(containingSymbol))
             {
-                var namespaceSymbol = (INamespaceSymbol)containingSymbol;
+                var namespaceSymbol = (INamespaceSymbol)containingSymbol!;
                 var shouldSkip = namespaceSymbol.IsGlobalNamespace && symbol.TypeKind == TypeKind.Error;
 
                 if (!shouldSkip)

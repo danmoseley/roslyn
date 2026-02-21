@@ -193,12 +193,13 @@ namespace Microsoft.CodeAnalysis.SymbolDisplay
                 if (ctor != null)
                 {
                     var type = ctor.ContainingType;
-                    if (!ctor.Parameters.Any() && type.Name == "FlagsAttribute")
+                    if (type != null && !ctor.Parameters.Any() && type.Name == "FlagsAttribute")
                     {
                         var containingSymbol = type.ContainingSymbol;
-                        if (containingSymbol.Kind == SymbolKind.Namespace &&
+                        if (containingSymbol != null &&
+                            containingSymbol.Kind == SymbolKind.Namespace &&
                             containingSymbol.Name == "System" &&
-                            ((INamespaceSymbol)containingSymbol.ContainingSymbol).IsGlobalNamespace)
+                            containingSymbol.ContainingSymbol is INamespaceSymbol ns && ns.IsGlobalNamespace)
                         {
                             return true;
                         }

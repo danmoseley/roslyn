@@ -1263,7 +1263,7 @@ namespace Microsoft.CodeAnalysis
 
                 if (!ReferenceEquals(corLib, Assembly))
                 {
-                    addIfNotNull(corLib.GetTypeByMetadataName(fullyQualifiedMetadataName));
+                    addIfNotNull(corLib!.GetTypeByMetadataName(fullyQualifiedMetadataName));
                 }
 
                 foreach (var referencedAssembly in SourceModule.ReferencedAssemblySymbols)
@@ -1746,7 +1746,7 @@ namespace Microsoft.CodeAnalysis
                             // a containing assembly, we treat them as in the current assembly for access purposes
                             return assemblyIsInReferences(s.ContainingAssembly ?? this.Assembly);
                         default:
-                            return assemblyIsInReferences(s.ContainingAssembly);
+                            return assemblyIsInReferences(s.ContainingAssembly!);
                     }
                 }
             }
