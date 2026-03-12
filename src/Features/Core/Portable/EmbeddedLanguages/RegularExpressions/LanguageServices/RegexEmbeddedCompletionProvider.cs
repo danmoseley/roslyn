@@ -386,6 +386,8 @@ internal sealed partial class RegexEmbeddedCompletionProvider(RegexEmbeddedLangu
         context.AddIfMissing(@"\S", Regex_non_white_space_character_short, Regex_non_white_space_character_long, parentOpt);
         context.AddIfMissing(@"\w", Regex_word_character_short, Regex_word_character_long, parentOpt);
         context.AddIfMissing(@"\W", Regex_non_word_character_short, Regex_non_word_character_long, parentOpt);
+
+        context.AddIfMissing(@"\R", Regex_any_newline_sequence_short, Regex_any_newline_sequence_long, parentOpt);
     }
 
     private static (RegexNode parent, RegexToken Token)? FindToken(

@@ -2204,6 +2204,12 @@ If ECMAScript-compliant behavior is specified, \w is equivalent to [a-zA-Z_0-9]<
   <data name="Regex_word_character_short" xml:space="preserve">
     <value>word character</value>
   </data>
+  <data name="Regex_any_newline_sequence_short" xml:space="preserve">
+    <value>any newline sequence</value>
+  </data>
+  <data name="Regex_any_newline_sequence_long" xml:space="preserve">
+    <value>\R matches any newline sequence. It is equivalent to the alternation \r\n|\n|\r|\f|\x85|\x{2028}|\x{2029}, matching a carriage return + line feed pair, or any individual newline character.</value>
+  </data>
   <data name="Regex_alternation_long" xml:space="preserve">
     <value>You can use the vertical bar (|) character to match any one of a series of patterns, where the | character separates each pattern.</value>
   </data>

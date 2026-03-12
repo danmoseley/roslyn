@@ -1523,6 +1523,23 @@ internal partial struct RegexParser
                     _lexer.Position--;
                     return ParseEscape(backslashToken, allowTriviaAfterEnd: false);
 
+                case 'R':
+                    // \R is a character class escape in non-ECMAScript mode.
+                    if (!HasOption(_options, RegexOptions.ECMAScript))
+                    {
+                        if (afterRangeMinus)
+                        {
+                            backslashToken = backslashToken.AddDiagnosticIfNone(new EmbeddedDiagnostic(
+                                string.Format(FeaturesResources.Cannot_include_class_0_in_character_range, nextChar),
+                                GetSpan(backslashToken, _currentToken)));
+                        }
+
+                        _lexer.Position--;
+                        return ParseEscape(backslashToken, allowTriviaAfterEnd: false);
+                    }
+
+                    goto default;
+
                 case '-':
                     // trivia is not allowed anywhere in a character class.
 
@@ -1614,6 +1631,18 @@ internal partial struct RegexParser
             case 'D':
                 return new RegexCharacterClassEscapeNode(
                     backslashToken, ConsumeCurrentToken(allowTrivia: allowTriviaAfterEnd));
+
+            case 'R':
+                // \R (any newline sequence) is only recognized outside of ECMAScript mode.
+                // In ECMAScript mode it falls through to ParseBasicBackslash where it is
+                // treated as a literal 'R' (self-escape).
+                if (!HasOption(_options, RegexOptions.ECMAScript))
+                {
+                    return new RegexCharacterClassEscapeNode(
+                        backslashToken, ConsumeCurrentToken(allowTrivia: allowTriviaAfterEnd));
+                }
+
+                break;
 
             case 'p':
             case 'P':
